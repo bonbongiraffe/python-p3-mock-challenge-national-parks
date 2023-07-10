@@ -22,8 +22,8 @@ class NationalPark:
         return trips_list 
     
     def visitors(self, new_visitor=None):
+        #don't know why this is here, v
         from classes.visitor import Visitor
-        from classes.trip import Trip
         visitor_list = []
         for trip in self.trips():
             if trip.visitor not in visitor_list:
@@ -31,7 +31,19 @@ class NationalPark:
         return visitor_list        
     
     def total_visits(self):
-        pass
+        return len(self.trips())
     
     def best_visitor(self):
-        pass
+        visitor_list = self.visitors()
+        b_visitor = None
+        visit_highest_count = 0
+        for visitor in visitor_list:
+            visit_count = 0
+            for trip in self.trips():
+                if trip.visitor == visitor:
+                    visit_count += 1
+            if visit_count > visit_highest_count:
+                b_visitor = visitor
+                visit_highest_count = visit_count
+        return b_visitor
+        
